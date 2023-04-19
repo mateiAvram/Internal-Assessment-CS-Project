@@ -1,0 +1,282 @@
+<!doctype html>
+<html lang="en">
+<head>
+<!-- Required meta tags -->
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="style/style.css">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=yes">
+
+<!-- Bootstrap CSS -->
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+	integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
+	crossorigin="anonymous">
+
+<title>Page Title</title>
+</head>
+<body style="background-color: #f5f5f5;">
+	<div class="container">
+		<div class="row" style="margin-top: 325px">
+			<div class="col-md-4"></div>
+			<div class="col-md-4">
+				<div class="logInSignUp">
+					<form class="form">
+						<div class="form-row">
+							<div class="form-group col-md-12">
+								<input type="text" class="form-control" id="inputUsername"
+									placeHolder="Username"
+									style="color: #202020; border: 3px solid #202020; border-radius: 7px;"
+									required> <span id="errorUsername"
+									class="invalid-feedback">Username can contain only
+									lowercase or uppercase characters and digits!</span>
+							</div>
+						</div>
+						<div class="form-group">
+							<input type="password" class="form-control" id="inputPassword1"
+								style="border: 3px solid #202020; border-radius: 7px;"
+								placeholder="Password" required> <span
+								id="errorPassword1" class="invalid-feedback">Password
+								must be at least 8 characters long and contain at least 1
+								lowercase, 1 uppercase and 1 digit!</span>
+						</div>
+						<div class="form-group">
+							<input type="password" class="form-control" id="inputPassword2"
+								style="border: 3px solid #202020; border-radius: 7px;"
+								placeholder="Confirm Password" required> <span
+								id="errorPassword2" class="invalid-feedback">Passwords do
+								not match!</span> <span id="error2Password2" class="invalid-feedback">Please
+								fill out these fields!</span>
+						</div>
+						<div class="form-row">
+							<div class="form-group col-md-12">
+								<input type="text" class="form-control" id="inputInviteCode"
+									placeHolder="Invite Code"
+									style="color: #202020; border: 3px solid #202020; border-radius: 7px;"
+									required> <span id="errorInviteCode"
+									class="invalid-feedback">Invite Code invalid!</span>
+							</div>
+						</div>
+						<div class="form-group">
+							<button type="button" class="btn btn-outline-success"
+								id="button-createAccount" style="width: 100%">Create
+								Account</button>
+						</div>
+						<div class="form-group">
+							<label for="formGroupExampleInput" style="color: #f5f5f5">Already
+								have an account? Log In!</label>
+							<button type="button" class="btn btn-outline-success"
+								onclick="window.location.href = 'logIn.html';"
+								style="width: 100%">Log In</button>
+						</div>
+					</form>
+				</div>
+			</div>
+			<div class="col-md-4"></div>
+		</div>
+	</div>
+
+</body>
+
+<!-- Alert Modal -->
+
+<div class="modal fade" id="accountCreated" data-backdrop="static">
+	<div class="modal-dialog modal-dialog-centered">
+		<div class="modal-content">
+		
+			 <!-- Modal Header -->
+			 <div class="modal-header" style = "background-color: #202020">
+			   <h4 class="modal-title" style = "color: #f5f5f5">Alert</h4>
+			 </div>
+			 
+			 <!-- Modal body -->
+			 <div class="modal-body" style = "background-color: #f5f5f5">
+			 
+				<h5 id = "modalText" style = "color: #202020"></h5>
+
+			 </div>
+			 
+			 <!-- Modal footer -->
+			 <div class="modal-footer" style = "background-color: #202020">
+			   <button type="button" class="btn btn-outline-success" data-dismiss="modal" id = "redirectModal" >Close</button>
+			 </div>
+		  
+		</div>
+	</div>
+</div>
+
+
+<script
+  src="https://code.jquery.com/jquery-3.5.1.js"
+  integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+  crossorigin="anonymous"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+	integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+	crossorigin="anonymous"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+	integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+	crossorigin="anonymous"></script>
+<script src="js/w3-include.js"></script>
+<script src="js/usernamePasswordValidation.js"></script>
+<script src="js/encryptionMD5.js"></script>
+
+<script>
+	$(document)
+			.ready(
+					function() {
+						$("#button-createAccount")
+								.click(
+										function() {
+											var inputUsername = $(
+													"#inputUsername").val();
+											var inputPassword1 = $(
+													"#inputPassword1").val();
+											var inputPassword2 = $(
+													"#inputPassword2").val();
+											var inputInviteCode = $("#inputInviteCode").val();
+											var validUsername = true;
+											var validPassword = true;
+											var same = true;
+
+											if (!checkUsername(inputUsername)) {
+												$("#errorUsername").show();
+												$("#inputUsername").addClass(
+														"border-danger");
+												validUsername = false;
+											} else {
+												$("#errorUsername").hide();
+												$("#inputUsername")
+														.removeClass(
+																"border-danger");
+												validUsername = true;
+											}
+
+											if (!checkPassword(inputPassword1)) {
+												$("#errorPassword1").show();
+												$("#inputPassword1").addClass(
+														"border-danger");
+												validPassword = false;
+											} else {
+												$("#errorPassword1").hide();
+												$("#inputPassword1")
+														.removeClass(
+																"border-danger");
+												validPassword = true;
+											}
+
+											if ((inputPassword1 == null || inputPassword1 == "")
+													&& (inputPassword2 == null || inputPassword2 == "")) {
+												$("#errorPassword1").hide();
+												$("#errorPassword2").hide();
+												$("#error2Password2").show();
+												$("#inputPassword1").addClass(
+														"border-danger");
+												$("#inputPassword2").addClass(
+														"border-danger");
+												same = true;
+											} else {
+												if (inputPassword1 != inputPassword2) {
+													$("#errorPassword2").show();
+													$("#error2Password2")
+															.hide();
+													$("#inputPassword1")
+															.removeClass(
+																	"border-danger");
+													$("#inputPassword2")
+															.addClass(
+																	"border-danger");
+													same = false;
+												} else if (!validPassword) {
+													$("#errorPassword1").show();
+													$("#errorPassword2").hide();
+													$("#error2Password2")
+															.hide();
+													$("#inputPassword1")
+															.addClass(
+																	"border-danger");
+													$("#inputPassword2")
+															.addClass(
+																	"border-danger");
+												} else {
+													$("#errorPassword2").hide();
+													$("#error2Password2")
+															.hide();
+													$("#inputPassword1")
+															.removeClass(
+																	"border-danger");
+													$("#inputPassword2")
+															.removeClass(
+																	"border-danger");
+													same = true;
+												}
+											}
+											if (validUsername && validPassword
+													&& same) {
+												
+												var encryptedPass = MD5(inputPassword1);
+
+												var objToSave = {
+
+													account : {
+																
+															username : inputUsername,
+															password : encryptedPass
+															
+														},
+													inviteCode : inputInviteCode
+
+												}
+												
+												$
+														.ajax({
+
+															type : 'POST',
+															url : 'http://localhost:8080/WebChat/rest/app/newAccount',
+															dataType : "json",
+															contentType : 'application/json',
+															data : JSON
+																	.stringify(objToSave),
+															error : function() {
+																//check for connection errors
+																alert("Connection to server error.");
+															},
+															success : function(
+																	resp) {
+
+																if (resp.errorCode != 0) {
+
+																	$("#inputInviteCode").addClass("border-danger");
+																	$("#errorInviteCode").show();
+																	
+																} else {
+																	var account = resp.account;
+																	$("#inputInviteCode").removeClass("border-danger");
+																	$("#errorInviteCode").hide();
+																	$("#modalText").replaceWith("<h5 id='modalText' style = 'color: #202020'> Your account has been registered with ID: " + account.id + "! <br> You will now be redirected to the log in page!</h5>");
+																	$("#accountCreated").modal("show");
+																	
+																}
+
+															}
+
+														})
+
+											}
+
+										});
+					});
+</script>
+
+<script>
+
+	$("#redirectModal").click( function() {
+
+		window.location.href = 'logIn.html';
+
+	})
+
+</script>
+
+</html>

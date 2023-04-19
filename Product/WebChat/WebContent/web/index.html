@@ -1,0 +1,1906 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=yes">
+		<link rel="stylesheet" type="text/css" href="style/style.css">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+		
+		<title>Page Title</title>	
+	</head>
+	
+	<body style = "background-color: #f5f5f5;">
+	
+		<nav class="navbar fixed-top navbar-expand-lg navbar-dark" style = "background-color: #202020; padding: 1px;">
+			<button class="btn profile circle" onclick="window.location.replace('index.html?page=0');"></button>
+			<div class="collapse navbar-collapse" id="navbarSupportedContent" style = "margin-left: 110px;">
+				<ul class="navbar-nav mr-auto">
+				  <li class="nav-item" style = "border-right: 2px solid #f5f5f5;">
+				    <a class="title" href=""><img class = "icon" src="img/friendsIcon.jpg">Friends <span class="sr-only">(current)</span></a>
+				  </li>
+				  <li class="nav-item">
+				  	<a class="topNav" id = "all" href="index.html?page=1">All<span class="sr-only">(current)</span></a>
+				  </li>
+				  <li class="nav-item">
+				  	<a class="topNav" id = "incoming" href="index.html?page=2">Incoming<span class="sr-only">(current)</span></a>
+				  </li>
+				  <li class="nav-item">
+				  	<a class="topNav" id = "pending" href="index.html?page=3">Pending<span class="sr-only">(current)</span></a>
+				  </li>
+				  <li class="nav-item">
+				  	<a class="topNav" id = "blocked" href="index.html?page=4">Blocked<span class="sr-only">(current)</span></a>
+				  </li>
+				  <li class="nav-item">
+				  	<button type="button" class="btn btn-sm btn-outline-success" data-toggle="modal" data-target="#addFriendModal" style = "margin-top: 10px; margin-left: 5px">+ Add Friend</button>
+				  </li>
+				</ul>
+			</div>
+		</nav>
+		
+		<div class="convSearch">
+			<button type="button" id= "openSearchFriendsModal" data-toggle="modal" data-target="#searchFriendsModal" class="btn search">Search Friends</button>
+		</div>
+		<div class = "myConv">
+			<ul id="activeConversations">
+				
+			</ul>
+		</div>
+		
+		<div class="main">
+		
+			<div class="header">
+			
+				
+			
+			</div>
+			
+			<div id="content">
+			
+				
+			
+			</div>
+		
+		</div>
+	
+	</body>
+	
+	<!-- Modals -->
+	
+	<div class="modal fade" id="addFriendModal">
+		<div class="modal-dialog modal-dialog-centered">
+			<div class="modal-content">
+			
+				 <!-- Modal Header -->
+				 <div class="modal-header" style = "background-color: #202020">
+				   <h4 class="modal-title" style = "color: #f5f5f5">Add Friend</h4>
+				 </div>
+				 
+				 <!-- Modal body -->
+				 <div class="modal-body" style = "background-color: #f5f5f5">
+				 
+				 	<form class="form">
+		              <div class="form-group">
+		                <input type="text" class="form-control" id="inputAddID" placeHolder = "ID" style="color: #202020; 
+		                border: 3px solid #f0f0f0; border-radius: 7px;">
+		                <span id="errorID" class="invalid-feedback">Invalid ID!</span>
+		                <span id="successID" class="valid-feedback">Friend request sent!</span>
+		              </div>
+		              <div class="form-group">
+		                <button type="button" class="btn btn-success" id = "button-AddFriend">Add Friend</button>
+		              </div>
+		            </form>
+				 </div>
+				 
+				 <!-- Modal footer -->
+				 <div class="modal-footer" style = "background-color: #202020">
+				   <button type="button" class="btn btn-outline-success" data-dismiss="modal">Close</button>
+				 </div>
+			  
+			</div>
+		</div>
+	</div>
+	
+	<div class="modal fade" id="searchFriendsModal">
+			<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+				<div class="modal-content">
+				
+					 <!-- Modal Header -->
+					 <div class="modal-header" style = "background-color: #202020">
+					   <h4 class="modal-title" style = "color: #f5f5f5">Search Friends</h4>
+					 </div>
+					 
+					 <!-- Modal body -->
+					 <div class="modal-body" style = "background-color: #f5f5f5">
+					 
+					 	<form class="form">
+					 		<div class="form-row">
+								<div class="form-group col-md-8">
+									<input type="text" class="form-control border" id="inputSearchFriends" placeHolder = "Username" style = "color: #202020">
+								</div>
+								<div class="form-group col-md-4">
+									<button type="button" id="searchFriendsButton" class="btn btn-success" style="width: 100%">Search</button>
+								</div>
+							</div>
+			              <div class = "form-group" >
+			              	<div class = "modal-list friendList">
+			              		<ul id="searchFriendList">
+			              		
+								</ul>
+			              	</div>
+			              </div>
+			            </form>
+					 </div>
+					 
+					 <!-- Modal footer -->
+					 <div class="modal-footer" style = "background-color: #202020">
+					   <button type="button" class="btn btn-outline-success" data-dismiss="modal">Close</button>
+					 </div>
+				  
+				</div>
+			</div>
+		</div>
+	
+	<div class="modal fade" tabindex="-1" role="dialog" id="optionModal">
+		<div class="modal-dialog modal-dialog-centered">
+			 <div class="modal-content">
+			 
+			 	 <div class="modal-header" style = "background-color: #202020">
+				   <h4 class="modal-title" style = "color: #f5f5f5">Options</h4>
+				 </div>
+			 
+				 <!-- Modal body -->
+				 <div class="modal-body" style = "background-color: #f5f5f5">
+				 	<div class="container">
+				 		<div class="row">
+				 			<div class="col-md-6">
+				 				<button type="button" style="width:100%" class="btn btn-danger block" id = "button-BlockFriend" data-dismiss="modal">Block</button>
+				 			</div>
+				 			<div class="col-md-6">
+				 				<button type="button" style="width:100%" class="btn btn-danger removeFriend" id = "button-RemoveFriend" data-dismiss="modal">Remove Friend</button>
+				 			</div>
+				 		</div>
+				 	</div>
+				 </div>
+				 	 
+				 <div class="modal-footer" style = "background-color: #202020">
+				 	<button type="button" class="btn btn-outline-success" data-dismiss="modal">Close</button>
+				 </div>
+				 
+			 </div>
+		</div>
+	</div>
+	
+	<div class="modal fade" id="saveNoChangesModal">
+		<div class="modal-dialog modal-dialog-centered">
+			<div class="modal-content">
+			
+				 <!-- Modal Header -->
+				 <div class="modal-header" style = "background-color: #202020">
+				   <h4 class="modal-title" style = "color: #f5f5f5">Alert</h4>
+				 </div>
+				 
+				 <!-- Modal body -->
+				 <div class="modal-body" style = "background-color: #f5f5f5">
+				 
+					<h5 style = "color: #202020">No changes have been made!</h5>
+	
+				 </div>
+				 
+				 <!-- Modal footer -->
+				 <div class="modal-footer" style = "background-color: #202020">
+				   <button type="button" class="btn btn-outline-success" data-dismiss="modal">Close</button>
+				 </div>
+			  
+			</div>
+		</div>
+	</div>
+	
+	<div class="modal fade" id="saveChangesModal"  data-backdrop="static">
+		<div class="modal-dialog modal-dialog-centered">
+			<div class="modal-content">
+			
+				 <!-- Modal Header -->
+				 <div class="modal-header" style = "background-color: #202020">
+				   <h4 class="modal-title" style = "color: #f5f5f5">Alert</h4>
+				 </div>
+				 
+				 <!-- Modal body -->
+				 <div class="modal-body" style = "background-color: #f5f5f5">
+				 
+					<h5 style = "color: #202020">Account has been updated!</h5>
+	
+				 </div>
+				 
+				 <!-- Modal footer -->
+				 <div class="modal-footer" style = "background-color: #202020">
+				   <button type="button" id="redirectModal" class="btn btn-outline-success" data-dismiss="modal">Close</button>
+				 </div>
+			  
+			</div>
+		</div>
+	</div>
+	
+	<div class="modal fade" id="deleteAccountModal"  data-backdrop="static">
+		<div class="modal-dialog modal-dialog-centered">
+			<div class="modal-content">
+			
+				 <!-- Modal Header -->
+				 <div class="modal-header" style = "background-color: #202020">
+				   <h4 class="modal-title" style = "color: #f5f5f5">Alert</h4>
+				 </div>
+				 
+				 <!-- Modal body -->
+				 <div class="modal-body" style = "background-color: #f5f5f5">
+				 	<form>
+						<div class = "form-group">
+							<h5 style = "color: #202020">Are you sure you want to delete your account?</h5>
+						</div>
+						<div class="form-group">
+						    <button type="button" class="btn btn-danger" id = "deleteAccountConfirm" style = "width:100%">Delete Account</button>
+						</div>
+				 	</form>
+				 </div>
+				 
+				 <!-- Modal footer -->
+				 <div class="modal-footer" style = "background-color: #202020">
+				   <button type="button" id="redirectModal" class="btn btn-outline-success" data-dismiss="modal">Close</button>
+				 </div>
+			  
+			</div>
+		</div>
+	</div>
+	
+	<div class="modal fade" id="deleteAccountRedirect"  data-backdrop="static">
+		<div class="modal-dialog modal-dialog-centered">
+			<div class="modal-content">
+			
+				 <!-- Modal Header -->
+				 <div class="modal-header" style = "background-color: #202020">
+				   <h4 class="modal-title" style = "color: #f5f5f5">Alert</h4>
+				 </div>
+				 
+				 <!-- Modal body -->
+				 <div class="modal-body" style = "background-color: #f5f5f5">
+				 
+					<h5 style = "color: #202020">Your account has been deleted! You will now be redirected to the Sign Up page!</h5>
+	
+				 </div>
+				 
+				 <!-- Modal footer -->
+				 <div class="modal-footer" style = "background-color: #202020">
+				   <button type="button" id="redirectDeleteModal" class="btn btn-outline-success" data-dismiss="modal">Close</button>
+				 </div>
+			  
+			</div>
+		</div>
+	</div>
+	
+	<script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+	<script src="js/sendFriendReq.js"></script>
+	<script src="js/usernamePasswordValidation.js"></script>
+	<script src="js/encryptionMD5.js"></script>
+	<script src="js/usernameGetter.js"></script>
+	<script src="js/saveProfileInfo.js"></script>
+	<script src="js/formatProfilePage.js"></script>
+	<script src="js/formatConvPage.js"></script>
+	
+	<script>
+	
+	$(document).ready( function () {
+		
+		//Document Function
+		
+		var pollingEnabled = false;
+		
+		//Navbar Function
+				
+			function addFriend() {
+				
+				//TO-TO FRIEND REQUEST INEXISTENT USERS BUG
+			
+				var idUserReceiver = $("#inputAddID").val();
+				
+				sendFriendReq(idUserReceiver);
+			}
+		
+		//Navbar Event Handlers
+		
+			$("#reloadPageModal").click( function() {
+			
+				pageSelect();
+				
+			});
+		
+		//Search Friends Modal
+		
+			$(document).on('click', '#openSearchFriendsModal', function() {
+				
+				getInitialFriendListModal()
+				
+			});
+		
+			$(document).on('click', '.optionSearchList', function() {
+				
+				$('#searchFriendsModal').modal('toggle');
+				friendOptions();
+				
+			});
+			
+			$(document).on('click', '.messageSearchList', function() {
+				
+				startNewConversation();
+				
+			});
+			
+			$(document).on('click', '#searchFriendsButton', function() {
+				
+				var str = $("#inputSearchFriends").val();
+				
+				if(str == "" || str == null) {
+					
+					getInitialFriendListModal();
+					
+				} else {
+					
+					getSearchFriendsResult(str);
+					$("#inputSearchFriends").val('');
+					
+				}
+				
+			});
+	
+			function getSearchFriendsResult(str) {
+			
+				$.ajax({
+					
+					type: 'POST',
+					url : "http://localhost:8080/WebChat/rest/app/searchFriends",
+					dataType : "json",
+					contentType : 'application/json',
+					data : JSON.stringify(str),
+					error : function() {
+				
+					},
+					success : function(resp) {
+						//check for server errors
+						if (resp.errorCode != 0) {
+							
+							if(resp.errorMessage == "Session has Expired!" || resp.errorMessage == "No Cookies") {
+								
+								window.location.reload('logIn.html');
+								
+							}
+							
+						} else {
+							
+							$("#searchFriendList").empty();
+							
+							var searchList = resp.accounts;
+							
+							for(var i = 0; i < searchList.length; i++) {
+								
+								var account = searchList[i];
+								$("#searchFriendList").append(
+										
+										"<li><button type = 'button' class = 'btn onlineProfileSearchList'></button><b style='float: left; margin-top: 7px; margin-left: 10px;'>" + account.username + "#" + account.id + 
+										"</b><button type='button' id='option_" + account.id + "' class='btn optionSearchList'></button><button type='button' id='message_" + account.id + 
+										"' class='btn messageSearchList'></button></li>"
+											
+								);
+								
+							}
+							
+							if(searchList.length == 0) {
+								
+								$("#searchFriendList").append(
+										
+										"<li style='' ><b style = 'text-align: center;'>No Results Found!</b></li>"
+											
+								);
+								
+							}
+							
+						}
+				
+					}
+				
+				})
+				
+			}
+			function getInitialFriendListModal() {
+				
+				$.ajax({
+					
+					type: 'GET',
+					url : "http://localhost:8080/WebChat/rest/app/getFriendList",
+					dataType : "json",
+					contentType : 'application/json',
+					error : function() {
+				
+					},
+					success : function(resp) {
+						//check for server errors
+						if (resp.errorCode != 0) {
+							
+							if(resp.errorMessage == "Session has Expired!" || resp.errorMessage == "No Cookies") {
+								
+								window.location.replace = 'logIn.html';
+								
+							}
+							
+						} else {
+							
+							$("#searchFriendList").empty();
+							
+							var friendList = resp.accounts;
+							
+							for(var i = 0; i < friendList.length; i++) {
+								
+								var account = friendList[i];
+								$("#searchFriendList").append(
+										
+										"<li><button type = 'button' class = 'btn onlineProfileSearchList'></button><b style='float: left; margin-top: 7px; margin-left: 10px;'>" + account.username + "#" + account.id + 
+										"</b><button type='button' id='option_" + account.id + "' class='btn optionSearchList'></button><button type='button' id='message_" + account.id + 
+										"' class='btn messageSearchList'></button></li>"
+											
+								);
+								
+							}
+							
+						}
+				
+					}
+				
+				})
+				
+			}
+		
+		//Siderbar Variables
+		
+		conversationsOffset = 0;
+		
+		conversationsDiv=$('#activeConversations');
+  		lastScrollTopConversations=Infinity;
+  		conversationsDiv.scrollTop(conversationsDiv.prop("scrollHeight") - conversationsDiv.prop("clientHeight")).on('wheel',wheelMessages);
+		
+		//Sidebar Functions
+		
+			function setConversationsOffSet(integer) {
+					
+				conversationsOffset = integer;
+				
+			}
+			
+			//getActiveConversations(conversationsOffset);
+			
+			function wheelConversations(){
+	            const st=$(this).scrollTop();
+	            if (st<=lastScrollTopConversations && st<300) getMoreConversations();
+	            lastScrollTopConversations=st;
+	        }
+	        function getMoreConversations(){
+	        	
+	        	process = true;
+	        	
+	        	conversationOffset++;
+	            const lastHeight=conversationsDiv.prop("scrollHeight")
+	            getMessages(conversationOffset);
+	            conversationsDiv.scrollTop(conversationsDiv.prop("scrollHeight")-lastHeight+4);
+	            conversationsDiv.off("wheel",wheelConversations);
+	            setTimeout(function(){
+	                conversationsDiv.on('wheel',wheelConversations);
+	            },3000);
+	            
+	            process = false;
+	        }
+		
+		//All Page Load Function
+		
+			function loadAllPage() {
+			
+				pollingEnabled = false;
+				
+				$("#content").empty();
+				$(".header").empty();
+				
+				$("#all").removeClass("topNav");
+				$("#all").addClass("active");
+				
+				$(".header").append("<b>All</b>");
+				
+				getAllPage();
+				
+			}
+		
+			//All Page Functions
+			
+				function getAllPage() {
+							
+									
+					$.ajax({
+						
+						type: 'GET',
+						url : "http://localhost:8080/WebChat/rest/app/getFriendList",
+						dataType : "json",
+						contentType : 'application/json',
+						error : function() {
+					
+						},
+						success : function(resp) {
+							//check for server errors
+							if (resp.errorCode != 0) {
+								
+								if(resp.errorMessage == "Session has Expired!" || resp.errorMessage == "No Cookies") {
+									
+									window.location.replace('logIn.html');
+									
+								}
+								
+							} else {
+								
+								$("#content").empty();
+								$("#searchFriendList").empty();
+								
+								var friendList = resp.accounts;
+								
+								for(var i = 0; i < friendList.length; i++) {
+									
+									var account = friendList[i];
+									$("#content").append(
+										
+											"<div class = 'contact'><button type = 'button' class = 'btn onlineProfile'></button><b>" + account.username + "#" + account.id + 
+											"</b><button type='button' id='option_" + account.id + "' class='btn option'></button><button type='button' id='message_" + 
+											account.id + "' class='btn message'></button></div>"
+												
+									);
+									
+								}
+								
+							}
+					
+						}
+					
+					})
+			
+				}
+				
+				function friendOptions() {
+					var idContactUser = event.target.id.substring(7);
+					
+					$('#button-BlockFriend').attr("id","button-BlockFriend_" + idContactUser)
+					$('#button-RemoveFriend').attr("id","button-RemoveFriend_" + idContactUser)
+					
+					$('#optionModal').modal('show');
+				}
+				
+				function startNewConversation() {
+					
+					var idMessageUser = event.target.id.substring(8);
+					
+					$.ajax({
+						
+						type : "POST",
+						url : 'http://localhost:8080/WebChat/rest/app/newConversation',
+						dataType : "json",
+						contentType : 'application/json',
+						data : JSON.stringify(idMessageUser),
+						error : function() {
+							//check for connection errors
+							alert("Connection to server error.");
+						},
+						success : function(resp) {
+							//check for server errors
+							if (resp.errorCode != 0) {
+								
+								if(resp.errorMessage == "Conversation already exists!") {
+									
+									var c = resp.conv;
+									var idConv = c.id;
+									
+									window.location.replace('index.html?page=5&id=' + idConv);
+									
+								}
+								
+							} else {
+								
+								var c = resp.conv;
+								var idConv = c.id;
+								
+								window.location.replace('index.html?page=5&id=' + idConv);
+								
+							}
+				
+						}
+						
+					})
+					
+				}
+				
+				function blockUser() {
+					
+					var idBlockedUser = event.target.id.substring(19);
+					
+					$.ajax({
+						
+						type : "POST",
+						url : 'http://localhost:8080/WebChat/rest/app/blockUser',
+						dataType : "json",
+						contentType : 'application/json',
+						data : JSON.stringify(idBlockedUser),
+						error : function() {
+							//check for connection errors
+							alert("Connection to server error.");
+						},
+						success : function(resp) {
+							//check for server errors
+							if (resp.errorCode != 0) {
+								alert("Server error: " + resp.errorCode + " " + resp.errorMessage);
+							} else {
+								getAllPage();
+							}
+				
+						}
+						
+					})
+					
+				}
+				
+				function removeFriend() {
+					
+					var idUserFriend = event.target.id.substring(20);
+					
+					$.ajax({
+						type : "DELETE",
+						url : 'http://localhost:8080/WebChat/rest/app/removeFriend',
+						dataType : "json",
+						contentType : 'application/json',
+						data : JSON.stringify(idUserFriend),
+						error : function() {
+							//check for connection errors
+							alert("Connection to server error.");
+						},
+						success : function(resp) {
+							//check for server errors
+							if (resp.errorCode != 0) {
+								alert("Server error: " + resp.errorCode + " " + resp.errorMessage);
+							} else {
+								getAllPage();
+							}
+		
+						}
+						
+					})
+				}
+		
+			//All Page Event Handlers
+			
+				$(document).on('click', '.option', function() {
+					
+					friendOptions();
+					
+				})
+				
+				$(document).on('click', '.message', function() {
+					
+					startNewConversation();
+					
+				})
+				
+				$(document).on('click', '.block', function() {
+					
+					blockUser();
+					
+				});
+				
+				$(document).on('click', '.removeFriend', function() {
+					
+					removeFriend();
+					
+				});
+				
+				$("#button-AddFriend").click(function() {
+					
+					addFriend();
+					
+				});
+		
+		
+		//Incoming Page Load Function
+		
+			function loadIncomingPage() {
+			
+				pollingEnabled = false;
+			
+				$("#content").empty();
+				$(".header").empty();
+				
+				$("#incoming").removeClass("topNav");
+				$("#incoming").addClass("active");
+				
+				$(".header").append("<b>Incoming</b>");
+				
+				getIncomingPage();
+				
+			}
+		
+		
+			//Incoming Page Functions
+			
+				function getIncomingPage() {
+			
+					$.ajax({
+						
+						type: 'GET',
+						url : "http://localhost:8080/WebChat/rest/app/getIncomingList",
+						dataType : "json",
+						contentType : 'application/json',
+						error : function() {
+					
+						},
+						success : function(resp) {
+							//check for server errors
+							if (resp.errorCode != 0) {
+								if(resp.errorMessage == "Session has Expired!" || resp.errorMessage == "No Cookies") {
+									
+									window.location.replace('logIn.html');
+									
+								}
+							} else {
+								
+								$("#content").empty();
+								
+								var incomingList = resp.accounts;
+								
+								for(var i = 0; i < incomingList.length; i++) {
+									
+									var account = incomingList[i];
+									$("#content").append(
+										
+											"<div class = 'contact'><button type = 'button' class = 'btn onlineProfile'></button><b>" + account.username + "#" + account.id + 
+											"</b><button type='button' id='remove_" + account.id + "' class='btn remove'></button><button type='button' id='ok_" + 
+											account.id + "' class='btn ok'></button></div>"
+												
+									);
+									
+								}
+								
+							}
+					
+						}
+							
+					}) // End Ajax Call
+
+				}
+			
+				function denyFriendReq(idUserSender) {
+					
+					var objToSave ={
+							
+							isIdSender : true,
+							id : idUserSender
+							
+					};
+					
+					$.ajax({
+						type : "DELETE",
+						url : 'http://localhost:8080/WebChat/rest/app/deleteFriendReq',
+						dataType : "json",
+						contentType : 'application/json',
+						data : JSON.stringify(objToSave),
+						error : function() {
+							//check for connection errors
+							alert("Connection to server error.");
+						},
+						success : function(resp) {
+							//check for server errors
+							if (resp.errorCode != 0) {
+
+								if(resp.errorMessage == "Session has Expired!" || resp.errorMessage == "No Cookies") {
+									
+									window.location.replace('logIn.html');
+									
+								}
+								
+							} else {
+								getIncomingPage();
+							}
+
+						}
+						
+					})
+					
+				}
+				
+				function acceptFriendReq(idUserSender) {
+					
+					$.ajax({
+						type : "POST",
+						url : 'http://localhost:8080/WebChat/rest/app/acceptFriendReq',
+						dataType : "json",
+						contentType : 'application/json',
+						data : JSON.stringify(idUserSender),
+						error : function() {
+							//check for connection errors
+							alert("Connection to server error.");
+						},
+						success : function(resp) {
+							//check for server errors
+							if (resp.errorCode != 0) {
+								
+								if(resp.errorMessage == "Session has Expired!" || resp.errorMessage == "No Cookies") {
+									
+									window.location.replace('logIn.html');
+									
+								}
+								
+							} else {
+								getIncomingPage();
+							}
+				
+						}
+						
+					})
+					
+				}
+				
+			//Incoming Page Event Handlers
+			
+				$(document).on('click', '.ok', function() {
+			
+					var idUserSender = event.target.id.substring(3);
+					
+					acceptFriendReq(idUserSender);
+					
+				});
+				
+				$(document).on('click', '.remove', function() {
+			
+					var idUserSender = event.target.id.substring(7);
+					
+					denyFriendReq(idUserSender);
+					
+				});
+				
+				
+		
+		//Pending Page Load Function
+		
+			function loadPendingPage() {
+			
+				pollingEnabled = false;
+			
+				$("#content").empty();
+				$(".header").empty();
+				
+				$("#pending").removeClass("topNav");
+				$("#pending").addClass("active");
+				
+				$(".header").append("<b>Pending</b>");
+				
+				getPendingPage();
+			
+			}
+		
+			//Pending Page Functions
+			
+				function getPendingPage() {
+					
+					$.ajax({
+						
+						type: 'GET',
+						url : "http://localhost:8080/WebChat/rest/app/getPendingList",
+						dataType : "json",
+						contentType : 'application/json',
+						error : function() {
+					
+						},
+						success : function(resp) {
+							//check for server errors
+							if (resp.errorCode != 0) {
+								if(resp.errorMessage == "Session has Expired!" || resp.errorMessage == "No Cookies") {
+									
+									window.location.replace('logIn.html');
+									
+								}
+							} else {
+								
+								$("#content").empty();
+								
+								var pendingList = resp.accounts;
+								
+								for(var i = 0; i < pendingList.length; i++) {
+									
+									var account = pendingList[i];
+									$("#content").append(
+										
+											"<div class = 'contact'><button type = 'button' class = 'btn onlineProfile'></button><b>" + account.username + "#" + account.id + 
+											"</b><button type='button' id='cancel_" + account.id + "' class='btn cancel'></button></div>"
+												
+									);
+									
+								}
+								
+							}
+					
+						}
+						
+					})
+					
+				}
+			
+				function cancelFriendReq(idUserReceiver) {
+					
+					var objToSave ={
+							
+							isIdSender : false,
+							id : idUserReceiver
+							
+					};
+					
+					$.ajax({
+						type : "DELETE",
+						url : 'http://localhost:8080/WebChat/rest/app/deleteFriendReq',
+						dataType : "json",
+						contentType : 'application/json',
+						data : JSON.stringify(objToSave),
+						error : function() {
+							//check for connection errors
+							alert("Connection to server error.");
+						},
+						success : function(resp) {
+							//check for server errors
+							if (resp.errorCode != 0) {
+								
+								if(resp.errorMessage == "Session has Expired!" || resp.errorMessage == "No Cookies") {
+									
+									window.location.replace('logIn.html');
+									
+								}
+								
+							} else {
+								getPendingPage();
+							}
+				
+						}
+						
+					})
+					
+				}
+				
+			//Pending Event Handlers
+			
+				$(document).on('click', '.cancel', function() {
+					
+					var idUserReceiver = event.target.id.substring(7);
+					cancelFriendReq(idUserReceiver);
+					
+				});
+			
+		//Blocked Page Load Function
+		
+			function loadBlockedPage() {
+			
+				pollingEnabled = false;
+			
+				$("#content").empty();
+				$(".header").empty();
+				
+				$("#blocked").removeClass("topNav");
+				$("#blocked").addClass("active");
+				
+				$(".header").append("<b>Blocked</b>");
+				
+				getBlockedPage();
+			
+			}
+		
+			//Blocked Page Functions
+			
+				function getBlockedPage() {
+					$.ajax({
+						
+						type: 'GET',
+						url : "http://localhost:8080/WebChat/rest/app/getBlockedList",
+						dataType : "json",
+						contentType : 'application/json',
+						error : function() {
+					
+						},
+						success : function(resp) {
+							//check for server errors
+							if (resp.errorCode != 0) {
+								if(resp.errorMessage == "Session has Expired!" || resp.errorMessage == "No Cookies") {
+									
+									window.location.replace('logIn.html');
+									
+								}
+							} else {
+								
+								$("#content").empty();
+								
+								var blockedList = resp.accounts;
+								
+								for(var i = 0; i < blockedList.length; i++) {
+									
+									var account = blockedList[i];
+									
+									$("#content").append(
+										
+											"<div class = 'contact'><button type = 'button' class = 'btn onlineProfile'></button><b>" + account.username + "#" + account.id + 
+											"</b><button type='button' id='unblock_" + account.id + "' class='btn unblock'></button></div>"
+												
+									);
+									
+								}
+								
+							}
+					
+						}
+					
+					})
+					
+				}
+			
+				function unblockUser(idBlockedUser) {
+					
+					$.ajax({
+						type : "DELETE",
+						url : 'http://localhost:8080/WebChat/rest/app/unblockUser',
+						dataType : "json",
+						contentType : 'application/json',
+						data : JSON.stringify(idBlockedUser),
+						error : function() {
+							//check for connection errors
+							alert("Connection to server error.");
+						},
+						success : function(resp) {
+							//check for server errors
+							if (resp.errorCode != 0) {
+
+								if(resp.errorMessage == "Session has Expired!" || resp.errorMessage == "No Cookies") {
+									
+									window.location.replace('logIn.html');
+									
+								}
+								
+							} else {
+								
+								getBlockedPage();
+								
+							}
+
+						}
+						
+					})
+					
+				}
+				
+			//Blocked Page Event Handlers
+			
+				$(document).on('click', '.unblock', function() {
+			
+					var idBlockedUser = event.target.id.substring(8);
+					
+					unblockUser(idBlockedUser);
+					
+				})
+				
+		//Profile Page Load Function
+		
+			function loadProfilePage() {
+				
+				pollingEnabled = false;
+				
+				$("#content").empty();
+				$(".header").empty();
+				
+				formatProfilePage();
+				
+				getProfilePage();
+				
+			}
+			
+			// Profile Page Functions
+			
+				function getProfilePage() {
+				
+					$.ajax({
+						
+						type : "GET",
+						url : "http://localhost:8080/WebChat/rest/app/getAccountInfo",
+						dataType : "json",
+						contentType : 'application/json',
+						error : function() {
+		
+						},
+						success : function(resp) {
+							//check for server errors
+							if (resp.errorCode != 0) {
+								if(resp.errorMessage == "Session has Expired!" || resp.errorMessage == "No Cookies") {
+									
+									window.location.replace('logIn.html');
+									
+								}
+							} else {
+								//put the received data into the form input
+								
+								var account = resp.account;
+								var inviteCodes = resp.inviteCodes;
+								
+								$(".header").empty();
+								$("#inviteCodes").empty();
+								
+								$(".header").append(
+										
+										"<button type='button' class='btn profileConversation'></button>" + 
+										"<b>" + account.username + "#" + account.id + "<b>"
+											
+								);
+								
+								$("#inputUsername").val("");
+								$("#inputOldPassword").val("");
+								$("#inputPassword1").val("");
+								$("#inputPassword2").val("");
+								
+								$("#fieldID").replaceWith("<input class='form-control' id = 'fieldID' style='border: 3px solid #202020; border-radius: 7px;' type='text' placeholder='#" + account.id + "'readonly>")
+								
+								for(var i = 0; i < inviteCodes.length; i++) {
+									
+									var inviteCode = inviteCodes[i];
+									
+									$("#inviteCodes").append(
+										
+											"<tr style='text-align: center; border-bottom-style: solid'><td><b style= 'color: #202020'>" + inviteCode + "</b></td></tr>"
+											
+									);
+									
+								}
+							}
+		
+						}
+					}); //End ajax call initial profile details
+					
+				}
+			
+				function logOut() {
+					
+					$.ajax({
+						type : "POST",
+						url : 'http://localhost:8080/WebChat/rest/app/logout',
+						dataType : "json",
+						contentType : 'application/json',
+						data : JSON.stringify(),
+						error : function() {
+							//check for connection errors
+							alert("Connection to server error.");
+						},
+						success : function(resp) {
+							//check for server errors
+							if (resp.errorCode != 0) {
+								
+								alert("Server error: " + resp.errorCode + " " + resp.errorMessage);
+								
+							} else {
+								
+								window.location.replace("logIn.html");
+								
+							}
+			
+						}
+			
+					}); //End ajax logout account
+					
+				}
+				
+				function deleteAccount() {
+					
+					var inputPassword = $("#inputOldPassword").val();
+					var encryptedPass = MD5(inputPassword);
+					
+					$.ajax({
+						type : "DELETE",
+						url : 'http://localhost:8080/WebChat/rest/app/deleteAccount',
+						dataType : "json",
+						contentType : 'application/json',
+						data : JSON.stringify(encryptedPass),
+						error : function() {
+							//check for connection errors
+							alert("Connection to server error.");
+						},
+						success : function(resp) {
+							//check for server errors
+							if (resp.errorCode != 0) {
+								
+								if(resp.errorMessage == "Session has Expired!" || resp.errorMessage == "No Cookies") {
+									
+									window.location.replace('logIn.html');
+									
+								}
+								
+								$("#deleteAccountModal").modal("hide");
+								$("#errorOldPassword").show();
+								$("#inputOldPassword").addClass("border-danger");
+							} else {
+								$("#errorOldPassword").hide();
+								$("#inputOldPassword").removeClass("border-danger");
+								$("#deleteAccountModal").modal("hide");
+								$("#deleteAccountRedirect").modal("show");
+							}
+			
+						}
+			
+					}); //End ajax delete account
+					
+				}
+				
+			//Profile Page Event Handlers
+			
+				$('body').on('click', '#button-save', function () {
+					
+					saveInfo();
+					
+				});
+			
+				$('body').on('click', '#button-logOut', function () {
+					
+					logOut();
+					
+				});
+				
+				$('body').on('click', '#deleteAccountConfirm', function () {
+					
+					deleteAccount();
+					
+				});
+				
+				$('body').on('click', '#button-deleteAccount', function () {
+					
+					$("#inputOldPassword").removeClass("border-danger");
+					$("#errorOldPassword").hide();
+					$("#deleteAccountModal").modal("show");
+					
+				});
+				
+				$("#redirectModal").click( function() {
+					
+					getProfilePage();
+					
+				});
+				
+				$("#redirectDeleteModal").click( function() {
+					
+					window.location.replace("signUp.html");
+					
+				});
+				
+		//Conversation Page Variables
+		
+			var process = false;
+	 		
+	  		messageOffset = 0;
+	  		var lastUpdateConv = 0;
+		
+		//Conversation Page Load Function
+		
+			function loadConversationPage() {
+					
+				$("#content").empty();
+				$(".header").empty();
+				
+				formatConvPage();
+				
+				messagesDiv=$('.messages');
+		  		lastScrollTop=Infinity;
+		  		messagesDiv.scrollTop(messagesDiv.prop("scrollHeight") - messagesDiv.prop("clientHeight")).on('wheel',wheelMessages);
+				
+				$("#messageList").empty();
+				
+				getMessages(messageOffset);
+				
+				$(".messages").animate({ scrollTop: $(".messages")[0].scrollHeight}, 1000);
+				
+				pollingEnabled = true;
+				
+				if(pollingEnabled) {
+				
+					setInterval(doPoll, 2000);
+					
+				}
+					
+			}
+			
+			//Conversation Page Functions
+			
+			function setMessageOffSet(integer) {
+				
+				messageOffset = integer;
+				
+			}
+			
+			function getMessages(messageOffset) {
+			
+				process = true;
+				
+				var urlParams = new URLSearchParams(
+						window.location.search);
+				
+				var idConv = urlParams.get('id');
+				
+				var objToSave ={
+						
+						idConv: idConv,
+						lastUpdate: lastUpdateConv,
+						offSet: messageOffset,
+						isPolling: false
+						
+				}
+				
+				$.ajax({
+					
+					type : "POST",
+					url : 'http://localhost:8080/WebChat/rest/app/getConversationInfo',
+					dataType : "json",
+					contentType : 'application/json',
+					data : JSON.stringify(objToSave),
+					error : function() {
+						
+					},
+						success : function(resp) {
+							
+							//check for server errors
+							if (resp.errorCode != 0) {
+	
+								if(resp.errorMessage == "Session has Expired!" || resp.errorMessage == "No Cookies") {
+									
+									window.location.replace('logIn.html');
+									
+								}
+								
+							} else {
+								
+								var account = resp.account;
+								
+								$(".header").empty();
+								
+								$(".header").append(
+										
+										"<button type='button' class='btn profileConversation'></button>" + 
+										"<b>" + account.username + "#" + account.id + "<b>"
+											
+								);
+								
+								var conversation = resp.conv;
+								lastUpdateConv = conversation.lastUpdate;
+								
+								$("#buttonSend").attr("id", "buttonSend_" + idConv)
+								
+								var messagesResp = resp.messagesResp;
+								
+								var acc1 = messagesResp.acc1;
+								var id1 = acc1.id;
+								var acc2 = messagesResp.acc2;
+								var id2 = acc2.id;
+								var messageList = messagesResp.messages;
+								
+								const days = [
+									  'Sun',
+									  'Mon',
+									  'Tue',
+									  'Wed',
+									  'Thu',
+									  'Fri',
+									  'Sat'
+									]
+								
+								const months = [
+									  'January',
+									  'February',
+									  'March',
+									  'April',
+									  'May',
+									  'June',
+									  'July',
+									  'August',
+									  'September',
+									  'October',
+									  'November',
+									  'December'
+									]
+								
+								for(var i = 0; i <messageList.length; i++) {
+									
+									var message = messageList[i];
+									var messageID = messageList[i].id;
+									
+									var current_date = new Date(message.time);
+									var hour = current_date.getHours();
+									var minutes = ('0'+current_date.getMinutes()).slice(-2);
+									var dayName = days[current_date.getDay()];
+									var day = current_date.getDate();
+									var month = current_date.getMonth();
+									var monthName = months[month];
+									var year = current_date.getFullYear();
+									
+									const dateFormatted = `${dayName}, ${day} ${monthName} ${year} at ${hour}:${minutes}`
+									
+									var idSender = message.idSender;
+									var idReciver = message.idReciver;
+									
+									var formattedMessage = formatMessage(message.content);
+									
+									
+									if(idSender == id1) {
+										$("#messageList").prepend(
+												
+												"<div class = 'row' id='messageId_" + messageID + "'><div class ='col-md-12' style = 'border-bottom: 1px solid #202020'>" +
+												"<h5>" + acc1.username + "#" + acc1.id + " - <span><small class='text-muted'>" + 
+												dateFormatted+ "</small></span></h5><b>" + formattedMessage + "</b></div></div>"
+											
+											);
+									} else if(idSender == id2) {
+										$("#messageList").prepend(
+												
+												"<div class = 'row' id='messageId_" + messageID + "'><div class ='col-md-12' style = 'border-bottom: 1px solid #202020'>" +
+												"<h5>" + acc2.username + "#" + acc2.id + " - <span><small class='text-muted'>" + 
+												dateFormatted+ "</small></span></h5><b>" + formattedMessage + "</b></div></div>"
+											
+											);
+										
+									}
+									
+									
+								}
+								
+								if(messageOffset == 0) {
+									$(".messages").scrollTop($(".messages").height()); 
+								}
+								
+							}
+					
+						}
+					
+				})
+				
+				process = false;
+				
+			}
+			
+			function refreshMessages() {
+	        	
+	        	process = true;
+	        	
+	        	var urlParams = new URLSearchParams(
+						window.location.search);
+				
+				var idConv = urlParams.get('id');
+				
+				var polling = true;
+				
+				var objToSave ={
+						
+						idConv: idConv,
+						lastUpdate: lastUpdateConv,
+						offSet: 0,
+						isPolling: true
+						
+				}
+				console.log(objToSave);
+				
+				$.ajax({
+					
+					type : "POST",
+					url : 'http://localhost:8080/WebChat/rest/app/getConversationInfo',
+					dataType : "json",
+					contentType : 'application/json',
+					data : JSON.stringify(objToSave),
+					error : function() {
+						
+					},
+						success : function(resp) {
+							
+							//check for server errors
+							if (resp.errorCode != 0) {
+								
+								if(resp.errorMessage == "Session has Expired!" || resp.errorMessage == "No Cookies") {
+									
+									window.location.replace('logIn.html');
+									
+								}
+								
+							} else {
+								
+								var conversation = resp.conv;
+								
+								$("#buttonSend").attr("id", "buttonSend_" + conversation.id)
+								
+								var messagesResp = resp.messagesResp;
+								
+								var acc1 = messagesResp.acc1;
+								var id1 = acc1.id;
+								var acc2 = messagesResp.acc2;
+								var id2 = acc2.id;
+								var messageList = messagesResp.messages;
+								
+								const days = [
+									  'Sun',
+									  'Mon',
+									  'Tue',
+									  'Wed',
+									  'Thu',
+									  'Fri',
+									  'Sat'
+									]
+								
+								const months = [
+									  'January',
+									  'February',
+									  'March',
+									  'April',
+									  'May',
+									  'June',
+									  'July',
+									  'August',
+									  'September',
+									  'October',
+									  'November',
+									  'December'
+									]
+								
+								for(var i = messageList.length - 1; i >= 0; i--) {
+									
+									var message = messageList[i];
+									var messageID = messageList[i].id;
+									
+									var current_date = new Date(message.time);
+									var hour = current_date.getHours();
+									var minutes = ('0'+current_date.getMinutes()).slice(-2);
+									var dayName = days[current_date.getDay()];
+									var day = current_date.getDate();
+									var month = current_date.getMonth();
+									var monthName = months[month];
+									var year = current_date.getFullYear();
+									
+									const dateFormatted = `${dayName}, ${day} ${monthName} ${year} at ${hour}:${minutes}`
+									
+									var idSender = message.idSender;
+									var idReciver = message.idReciver;
+									
+									var formattedMessage = formatMessage(message.content);
+									
+									
+									if(idSender == id1) {
+										$("#messageList").append(
+												
+												"<div class = 'row' id='messageId_" + messageID + "'><div class ='col-md-12' style = 'border-bottom: 1px solid #202020'>" +
+												"<h5>" + acc1.username + "#" + acc1.id + " - <span><small class='text-muted'>" + 
+												dateFormatted+ "</small></span></h5><b>" + formattedMessage + "</b></div></div>"
+											
+											);
+									} else if(idSender == id2) {
+										$("#messageList").append(
+												
+												"<div class = 'row' id='messageId_" + messageID + "'><div class ='col-md-12' style = 'border-bottom: 1px solid #202020'>" +
+												"<h5>" + acc2.username + "#" + acc2.id + " - <span><small class='text-muted'>" + 
+												dateFormatted+ "</small></span></h5><b>" + formattedMessage + "</b></div></div>"
+											
+											);
+										
+									}
+										
+								}
+								
+								lastUpdateConv = conversation.lastUpdate;
+								
+							}
+					
+						}
+					
+				})
+				
+				process = false;
+	        	
+	        }
+			
+			function doPoll() {
+				
+	        	if (!process) {
+	        		
+	        		refreshMessages();
+	        		var scrollPos = $(".messages").scrollTop();
+	        		const messagesDivHeight = $(".messages").innerHeight();
+	        		var value = $(".messages")[0].scrollHeight;
+	        		if(scrollPos + messagesDivHeight >= value) {
+	        			
+	        			$(".messages").animate({ scrollTop: $(".messages")[0].scrollHeight}, 1000);
+	        			
+	        		}
+	        		
+	        	}
+	        	
+	        }
+			
+			function sendMessage() {
+				
+				process = true;
+				
+				var message = $("#messageInput").val();
+				
+				var elementID = $(".sendButton").attr('id');
+				var idConv = elementID.substring(11);
+				
+				var objToSave = {
+						
+						idConv : idConv,
+						content : message
+						
+				}
+				
+				$.ajax({
+					
+					type : "POST",
+					url : 'http://localhost:8080/WebChat/rest/app/newMessage',
+					dataType : "json",
+					contentType : 'application/json',
+					data : JSON.stringify(objToSave),
+					error : function() {
+						
+					},
+						success : function(resp) {
+							
+							$("#messageInput").val('');
+							
+							//check for server errors
+							if (resp.errorCode != 0) {
+								
+								if(resp.errorMessage == "Session has Expired!" || resp.errorMessage == "No Cookies") {
+									
+									window.location.replace('logIn.html');
+									
+								}
+								
+							} else {
+								
+								$("#messageList").empty();
+								setMessageOffSet(0);
+								getMessages(messageOffset);
+								
+							}
+					
+						}
+					
+				})
+				
+				process = false;
+			}
+			
+			function formatMessage(text) {
+				
+				var length = text.length;
+				var index = 0;
+				var charMax = 123
+				var formattedMessage = new String();
+				
+				while(length > 0) {
+					
+					var paragraph = new String();
+					
+					if(index+charMax > text.length) {
+						paragraph = text.substring(index, text.length);
+					} else {
+						paragraph = text.substring(index, index+charMax) + "<br>";
+					}
+					
+					formattedMessage = formattedMessage + paragraph;
+					
+					index = index + charMax;
+					length = length - charMax;
+					
+				}
+				
+				return formattedMessage;
+				
+			}
+			
+			function wheelMessages(){
+	            const st=$(this).scrollTop();
+	            if (st<=lastScrollTop && st<300) getMoreMessages();
+	            lastScrollTop=st;
+	        }
+	        function getMoreMessages(){
+	        	
+	        	process = true;
+	        	
+	        	messageOffset++;
+	            const lastHeight=messagesDiv.prop("scrollHeight")
+	            getMessages(messageOffset);
+	            messagesDiv.scrollTop(messagesDiv.prop("scrollHeight")-lastHeight+4);
+	            messagesDiv.off("wheel",wheelMessages);
+	            setTimeout(function(){
+	                messagesDiv.on('wheel',wheelMessages);
+	            },3000);
+	            
+	            process = false;
+	        }
+	        
+	        //Conversation Page Event Handlers
+	        
+	        $(document).on('keypress',function(e) {
+			    if(e.which == 13) {
+			    	var message = $("#messageInput").val();
+			    	if(message != ""){
+			    		sendMessage();
+			    	}
+			    }
+			});
+	        
+	        $(document).on('click', '.sendButton', function() {
+		  		
+				var message = $("#messageInput").val();
+		    	if(message != ""){
+		    		sendMessage();
+		    	}
+		  		
+		  	});
+	        
+	        
+	        
+			
+			
+					
+			
+		//Page Entry
+		
+			var PageSelect = function pageSelect() {
+				
+				var r = $.Deferred();
+			
+				const queryString = window.location.search;
+				const urlParams = new URLSearchParams(queryString);
+				
+				var page = urlParams.get('page');
+				
+// 				getInitialFriendListModal();
+				
+				if(page == 0) {
+					
+					loadProfilePage();
+					
+				} else if(page == 1) {
+					
+					loadAllPage();
+					
+				} else if(page == 2) {
+					
+					loadIncomingPage();
+					
+				} else if(page == 3) {
+					
+					loadPendingPage();
+					
+				} else if(page == 4) {
+					
+					loadBlockedPage();
+					
+				} else if(page == 5) {
+					
+					loadConversationPage();
+					
+				}
+				setTimeout(function() {
+				
+					r.resolve();
+					
+				}, 50);
+				
+				return r;
+				
+				//setTimeout(getActiveConversations(conversationsOffset), 100);
+				
+			}
+			
+			var ActiveConversations = function getActiveConversations() {
+				
+				var offSet = conversationsOffset;
+				
+				$.ajax({
+					
+					type: 'POST',
+					url: "http://localhost:8080/WebChat/rest/app/getActiveConversations",
+					dataType : "json",
+					contentType : 'application/json',
+					data : JSON.stringify(offSet),
+					error : function() {
+				
+					},
+					success : function(resp) {
+						//check for server errors
+						if (resp.errorCode != 0) {
+							
+							if(resp.errorMessage == "Session has Expired!" || resp.errorMessage == "No Cookies") {
+								
+								window.location.replace('logIn.html');
+								
+							}
+							
+						} else {
+							
+							$("#activeConversations").empty();
+							
+							const queryString = window.location.search;
+							const urlParams = new URLSearchParams(queryString);
+							
+							var page = urlParams.get('page');
+							
+							var flag = false;
+							
+							var convID = -1;
+							
+							if(page == 5) {
+								
+								convID = urlParams.get('id');
+								flag = true;
+								
+							}
+							
+							var conversationsList = resp.conversations;
+							var accList = resp.accounts;
+							
+							for(var i = 0; i < conversationsList.length; i++) {
+								
+								var conv = conversationsList[i];
+								var acc = accList[i];
+								
+								if(flag) {
+									
+									if(conv.id == convID) {
+										
+										$("#activeConversations").append(
+												
+												"<li><a class ='activeConv' href='index.html?page=5&id=" + conv.id + "'><img src='img/profileDefault.png' class = 'convProfile rounded-circle'> <b>" + acc.username + "#" + acc.id + "</b></a></li>"
+													
+										);
+										
+									} else {
+										
+										$("#activeConversations").append(
+												
+												"<li><a href='index.html?page=5&id=" + conv.id + "'><img src='img/profileDefault.png' class = 'convProfile rounded-circle'> <b>" + acc.username + "#" + acc.id + "</b></a></li>"
+													
+										);
+										
+									}
+									
+								} else {
+									
+									$("#activeConversations").append(
+											
+											"<li><a href='index.html?page=5&id=" + conv.id + "'><img src='img/profileDefault.png' class = 'convProfile rounded-circle'> <b>" + acc.username + "#" + acc.id + "</b></a></li>"
+												
+									);
+									
+								}
+								
+								
+								
+							}
+							
+						}
+				
+					}
+					
+				});
+				
+			}
+		
+			PageSelect().done(ActiveConversations);
+		
+				
+		
+		
+	});
+	
+	</script>
+
+</html>

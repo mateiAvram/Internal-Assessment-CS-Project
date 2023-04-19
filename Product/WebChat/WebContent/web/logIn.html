@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="en">
+<head>
+<!-- Required meta tags -->
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="style/style.css">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=yes">
+
+<!-- Bootstrap CSS -->
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+	integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
+	crossorigin="anonymous">
+
+<title>Page Title</title>
+</head>
+<body style="background-color: #f5f5f5;">
+	<div class="container">
+		<div class="row" style="margin-top: 325px">
+			<div class="col-md-4"></div>
+			<div class="col-md-4">
+				<div class="logInSignUp">
+					<form class="form">
+						<div class="form-row">
+							<div class="form-group col-md-6">
+								<input type="text" class="form-control " id="inputUsername"
+									placeHolder="Username"
+									style="color: #202020; border: 3px solid #202020; border-radius: 7px;">
+							</div>
+							<div class="form-group col-md-6">
+								<input type="text" class="form-control " id="inputID"
+									placeHolder="ID"
+									style="color: #202020; border: 3px solid #202020; border-radius: 7px;">
+							</div>
+						</div>
+						<div class="form-group">
+							<input type="password" class="form-control" id="inputPassword"
+								placeholder="Password"
+								style="color: #202020; border: 3px solid #202020; border-radius: 7px;">
+							<span id="errorAccount" class="invalid-feedback">ID, username and
+								password do not match!</span>
+						</div>
+						<div class="form-group">
+							<div class="form-check">
+								<input class="form-check-input" type="checkbox" id="gridCheck">
+								<label class="form-check-label" for="gridCheck"
+									style="color: #f5f5f5"> Remember Me </label>
+							</div>
+						</div>
+						<div class="form-row">
+
+							<div class="form-group col-md-6">
+								<button type="button" class="btn btn-outline-success"
+									style="width: 100%" id="button-logIn">Log In</button>
+							</div>
+							<div class="form-group col-md-6">
+								<button type="button" class="btn btn-outline-success"
+									style="width: 100%"
+									onclick="window.location.href = 'signUp.html';">Sign
+									Up</button>
+							</div>
+						</div>
+
+					</form>
+				</div>
+			</div>
+			<div class="col-md-4"></div>
+		</div>
+	</div>
+
+</body>
+<script src="https://code.jquery.com/jquery-3.5.1.js"
+	integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+	crossorigin="anonymous"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+	integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+	crossorigin="anonymous"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+	integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+	crossorigin="anonymous"></script>
+<script src="js/w3-include.js"></script>
+<script src="js/encryptionMD5.js"></script>
+
+<script>
+	$(document).ready(function() {
+		
+		function checkSession() {
+			
+			$.ajax({
+				
+				type : "POST",
+				url : "http://localhost:8080/WebChat/rest/app/checkSession",
+				dataType : "json",
+				contentType : 'application/json',
+				data : JSON.stringify(),
+				error : function() {
+					//check for connection errors
+					alert("Connection to server error.");
+				},
+				success : function(resp) {
+					if(resp.errorCode != 0){
+						
+						if(resp.errorMessage != "No Cookies") {
+							
+							alert("Server Error:" + resp.errorMessage);
+							
+						}
+						
+						
+					} else {
+						
+						if(resp.errorMessage == "Active Session!") {
+							
+							window.location.replace("index.html?page=1");
+							
+						}
+						
+						
+					}
+				}
+
+			});//end ajax call verify password
+			
+		}
+		
+		function logIn() {
+			
+			var inputID = $("#inputID").val();
+			var inputUsername = $("#inputUsername").val();
+			var inputPassword = $(
+					"#inputPassword").val();
+			
+			if((inputID == null || inputID == "") || (inputUsername == null || inputUsername == "") || (inputPassword == null || inputPassword == "")) {
+				
+				$("#errorAccount").show();
+				$("#inputID").addClass("border-danger");
+				$("#inputUsername").addClass("border-danger");
+				$("#inputPassword").addClass("border-danger");
+				
+			} else {
+				
+				var encryptedPass = MD5(inputPassword);
+				
+				var objToSave = {
+						id : inputID,
+						username : inputUsername,
+						password : encryptedPass
+				}
+				
+				$.ajax({
+					
+					type : "POST",
+					url : "http://localhost:8080/WebChat/rest/app/login",
+					dataType : "json",
+					contentType : 'application/json',
+					data : JSON.stringify(objToSave),
+					error : function() {
+						//check for connection errors
+						alert("Connection to server error.");
+					},
+					success : function(resp) {
+						if(resp.errorCode != 0){
+							
+							if(resp.errorMessage == "Already Logged In!") {
+								
+								window.location.replace("index.html?page=1");
+								
+							}
+							
+							$("#errorAccount").show();
+							$("#inputID").addClass("border-danger");
+							$("#inputUsername").addClass("border-danger");
+							$("#inputPassword").addClass("border-danger");
+							
+						} else {
+							$("#errorAccount").hide();
+							$("#inputID").removeClass("border-danger");
+							$("#inputUsername").removeClass("border-danger");
+							$("#inputPassword").removeClass("border-danger");
+							window.location.replace("index.html?page=1");
+						}
+					}
+
+				});//end ajax call verify password
+				
+			}
+
+		}
+		
+		$(document).on('keypress',function(e) {
+		    if(e.which == 13) {
+		    	var message = $("#messageInput").val();
+		    	if(message != ""){
+		    		logIn();
+		    	}
+		    }
+		});
+		
+		$("#button-logIn").click(function() {
+			
+			logIn();
+			
+		});
+		
+		setTimeout(checkSession(), 100);
+		
+	});//end doc ready
+					
+	
+					
+	
+	
+	
+	
+					
+</script>
+
+</html>

@@ -1,0 +1,399 @@
+button.profile {
+	margin-left: 180px;
+	padding: 0px;
+	width: 40px;
+	height: 40px;
+	border-radius: 50%; 
+	background:transparent url('../img/profileDefault.jpg') center;
+}
+
+button.profile:hover {
+	border-radius: 50%; 
+	background-image: url('../img/profileDefault1.jpg');
+}
+
+button.help {
+	float: right;
+	margin-right: 20px;
+	padding: 0px;
+	width: 45px;
+	height: 45px;
+	border-radius: 50%;
+	background:transparent url('../img/helpDefault.jpg') center;
+}
+
+button.help:hover {
+	background-image: url('../img/helpDefault1.jpg');
+}
+
+button.messageSearchList {
+	float:right;
+	width: 40px;
+	height: 40px;
+	margin-right: 5px;
+	border-radius: 50%;
+	background:transparent url('../img/messageButton.jpg') center;
+}
+
+button.optionSearchList {
+	
+	float:right;
+	width: 40px;
+	height: 40px;
+	border-radius: 50%; 
+	background:transparent url('../img/optionButton.jpg') center;
+}
+
+button.message {
+	float:right;
+	margin-top: 20px;
+	margin-left: 5px;
+	width: 40px;
+	height: 40px;
+	border-radius: 50%; 
+	background:transparent url('../img/messageButton.jpg') center;
+}
+
+button.option {
+	float:right;
+	margin-top: 20px;
+	margin-left: 5px;
+	margin-right: 10px;
+	width: 40px;
+	height: 40px;
+	border-radius: 50%; 
+	background:transparent url('../img/optionButton.jpg') center;
+}
+
+button.ok {
+	float:right;
+	margin-top: 20px;
+	margin-left: 5px;
+	width: 40px;
+	height: 40px;
+	border-radius: 50%; 
+	background:transparent url('../img/ok.jpeg') center;
+}
+
+button.remove {
+	float:right;
+	margin-top: 20px;
+	margin-left: 5px;
+	margin-right: 10px;
+	width: 40px;
+	height: 40px;
+	border-radius: 50%; 
+	background:transparent url('../img/cancel.jpeg') center;
+}
+
+button.cancel {
+	float:right;
+	margin-top: 20px;
+	margin-left: 5px;
+	margin-right: 10px;
+	width: 40px;
+	height: 40px;
+	border-radius: 50%; 
+	background:transparent url('../img/cancel.jpeg') center;
+}
+
+button.unblock {
+	float:right;
+	margin-top: 20px;
+	margin-left: 5px;
+	margin-right: 10px;
+	width: 40px;
+	height: 40px;
+	border-radius: 50%; 
+	background:transparent url('../img/cancel.jpeg') center;
+}
+
+button.onlineProfileSearchList {
+	
+	float:left;
+	width: 40px;
+	height: 40px;
+	border-radius: 50%; 
+	background:transparent url('../img/profileDefault.jpg') center;
+}
+
+button.onlineProfile {
+	float:left;
+	margin-top: 20px;
+	margin-left: 10px;
+	width: 40px;
+	height: 40px;
+	border-radius: 50%; 
+	background:transparent url('../img/profileDefault.jpg') center;
+}
+
+button.profilePageImage {
+	width: 80px;
+	height: 80px;
+	border-radius: 50%; 
+	background:transparent url('../img/profileDefaultImage.jpg') center;
+}
+
+button.profileConversation {
+	float:left;
+	margin-left: 10px;
+	margin-right: 20px;
+	width: 40px;
+	height: 40px;
+	border-radius: 50%; 
+	background:transparent url('../img/profileDefault.jpg') center;
+}
+
+button.sendButton {
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
+	background:transparent url('../img/sendMessage.jpg') center;
+}
+
+img.convImg {
+	width: 40px;
+	height: 40px;
+}
+
+a.topNav {
+	color: #f5f5f5;
+	padding: 14px 25px;
+	text-align: center;
+	display:block;
+	text-decoration: none;
+}
+
+a.topNav:hover {
+	text-decoration: none;
+	color: #202020;
+	background-color: #f5f5f5;
+}
+
+a.title {
+	margin-left: 65px;
+	color: #f5f5f5;
+	padding: 14px 25px;
+	text-align: center;
+	display:block;
+	text-decoration: none;
+}
+
+a.title:hover {
+	text-decoration: none;
+	color: #f5f5f5;
+	background-color: #202020;
+}
+
+img.icon {
+	width: 20px;
+	height: 20px;
+}
+
+a.active {
+	color: #f5f5f5;
+	background-color: #00a751;
+	padding: 14px 25px;
+	text-align: center;
+	display:block;
+	text-decoration: none;
+}
+
+a.active:hover {
+	color: #202020;
+	text-decoration: none;
+	background-color: #f5f5f5;
+}
+
+a.activeConv {
+	color: #f5f5f5;
+	background-color: #00a751;
+	display:block;
+	text-decoration: none;
+}
+
+a.activeConv:hover {
+	color: #202020;
+	text-decoration: none;
+	background-color: #f5f5f5;
+}
+
+.search {
+	margin-top: 12px;
+	margin-left: 8px;
+	width: 380px;
+	float: left;
+}
+
+.convSearch {
+	width: 400px;
+	position: fixed;
+	top: 54px;
+	left: 0;
+	height: 63px;
+	background: #505050;
+	overflow: hidden;
+	text-align: center;
+	border-bottom: 4px solid black;
+}
+
+.modal-list {
+	background: #a6a6a6;
+}
+
+.modal-list ul{
+	list-style-type: none;
+	padding: 0px;
+}
+
+.modal-list li{
+	color: #202020;
+	text-decoration: none;
+	display: inline-block;
+	width: 100%;
+	text-align: center;
+	padding: 16px 8px;
+	border-bottom: 2px solid black;
+}
+
+.modal-list li:hover {
+	background-color: #f5f5f5;
+}
+
+.friendList ul {
+	
+	height: 250px;
+	overflow: auto;
+	
+}
+
+.myConv {
+	width: 400px;
+	position: fixed;
+	top: 117px;
+	left: 0;
+	height: 100%;
+	background: #a6a6a6;
+}
+
+.myConv ul{
+	list-style-type: none;
+	padding: 0px;
+	width: 400px;
+	background-color: #a6a6a6;
+	position: fixed;
+	height: 100%;
+	overflow: auto;
+}
+
+.myConv li a{
+	color: #202020;
+	text-decoration: none;
+	display: block;
+	padding: 25px 16px;
+	border-bottom: 2px solid black;
+}
+
+.myConv li a:hover{
+	background-color: #f5f5f5;
+}
+
+.main {
+	margin-top: 54px;
+	margin-left: 400px;
+	padding: 8px 16px;
+	height:100%;
+	background-color: #f5f5f5;
+}
+
+.header {
+	margin-left:100px;
+	margin-right: 100px;
+	border-bottom: 4px solid #202020;
+}
+
+.header b{
+	font-size: 34px;
+	color: #202020;
+}
+
+.bodyPage {
+	margin-left:100px;
+	margin-right: 100px;
+	margin-top: 50px;
+}
+.contact {
+	margin-left:100px;
+	margin-right: 100px;
+	border-bottom: 2px solid #a6a6a6;
+	height: 80px;
+	text-align: center;
+}
+
+div.contact:hover {
+	background-color: #a6a6a6;
+}
+
+.contact b {
+	float: left;
+	margin-top: 25px;
+	margin-left: 30px;
+	font-size: 20px;
+	color: #202020;
+}
+
+.chat {
+	margin-left:100px;
+	margin-top: 75px;
+	margin-right: 100px;
+	height:740px;
+}
+
+.conversation {
+	margin-left: 50px;
+	margin-right: 50px;
+	padding-top: 1px;
+	padding-bottom: 1px;
+	height: 100%;
+	border-radius: 15px;
+	background-color: #202020;
+}
+
+.messages {
+	height: 87%;
+	margin-top: 15px;
+	margin-right: 20px;
+	margin-left: 20px;
+	margin-bottom: 15px;
+	background-color: #f5f5f5;
+	border-radius: 15px;
+	overflow: auto;
+}
+
+div.messageNav {
+	border-top: 2px solid #f5f5f5;
+	padding: 15px 0px;
+	margin-left: 20px;
+	margin-right: 20px;
+	overflow: hidden;
+}
+
+.typeMessage {
+	float:left;
+	width: 1050px;
+}
+
+.sendButtonContainer {
+	text-align: center;
+}
+.logInSignUp {
+	background-color: #272727;
+	padding: 8px;
+	border: 8px solid #202020;
+	border-radius: 15px;
+}
+
+.border-warningForm{
+	border: 2px solid red;
+}
+
